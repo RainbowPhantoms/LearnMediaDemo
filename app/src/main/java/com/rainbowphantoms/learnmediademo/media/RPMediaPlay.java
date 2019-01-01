@@ -1,5 +1,6 @@
 package com.rainbowphantoms.learnmediademo.media;
 
+import android.media.MediaCodec;
 import android.media.MediaExtractor;
 import android.media.browse.MediaBrowser;
 
@@ -10,8 +11,7 @@ import android.media.browse.MediaBrowser;
 public class RPMediaPlay {
     private static final String TAG  = "RPMediaPlay";
 
-    /** 媒体分离器 **/
-    private MediaExtractor mExtractor;
+
 
 
 }
