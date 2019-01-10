@@ -1,4 +1,4 @@
-package com.rainbowphantoms.learnmediademo.media;
+package com.rainbowphantoms.learnmediademo.media.decodec;
 
 import android.media.MediaCodec;
 import android.media.MediaExtractor;
