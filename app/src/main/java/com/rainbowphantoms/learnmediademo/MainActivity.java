@@ -18,6 +18,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.EditText;
 
+import com.rainbowphantoms.learnmediademo.component.ExtractorActivity;
 import com.rainbowphantoms.learnmediademo.component.audio.AudioPlayActivity;
 import com.rainbowphantoms.learnmediademo.component.video.VideoPlayActivity;
 import com.rainbowphantoms.learnmediademo.component.video.VideoPlayFbFActivity;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText edSeek;
     private AppCompatSeekBar mSeekBar;
 
-    private String mVideoPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/lsq_cut_20190107_210249912.mp4";
+    private String mVideoPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/lsq_20190111_174550235.mp4";
 //    private String mVideoPath = "/storage/emulated/0/DCIM/Camera/lsq_20190104_172151525.mp4";
     private RPMediaDeCodec mVideoCodec;
     private RPMediaDeCodec mAudioCodec;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},0);
+        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},0);
 
         Log.e(TAG ,"CPU : "+ Build.HARDWARE);
 
@@ -173,15 +174,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void resume(View view) {
         mVideoCodec.resume();
+        if(mAudioTrack != null)
         mAudioTrack.play();
         mAudioCodec.resume();
     }
 
     public void pause(View view) {
         mVideoCodec.pause();
-        mAudioTrack.pause();
-        mAudioTrack.flush();
-        mAudioTrackWarp.setSeekPts(mAudioCodec.getPlayTimeUs());
+        if(mAudioTrack != null) {
+            mAudioTrack.pause();
+            mAudioTrack.flush();
+            mAudioTrackWarp.setSeekPts(mAudioCodec.getPlayTimeUs());
+        }
         mAudioCodec.pause();
     }
 
@@ -213,5 +217,10 @@ public class MainActivity extends AppCompatActivity {
     /** 跳转到PCM播放 **/
     public void gotoPCMPlay(View view) {
 
+    }
+
+    public void gotoExctor(View view) {
+        Intent intent = new Intent(this,ExtractorActivity.class);
+        startActivity(intent);
     }
 }

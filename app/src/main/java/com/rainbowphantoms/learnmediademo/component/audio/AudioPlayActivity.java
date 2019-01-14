@@ -24,7 +24,7 @@ import java.nio.ByteBuffer;
 /** 音频播放 **/
 public class AudioPlayActivity extends AppCompatActivity {
     private static final String TAG = "AudioPlayActivity";
-    private String mPath = Environment.getExternalStorageDirectory().getPath()+"/output.mp4";
+    private String mPath = Environment.getExternalStorageDirectory().getPath()+"/lsq_20190111_174550235.mp4";
 
     /** 拖动进度视图 **/
     private AppCompatSeekBar lsqSeekBar;

@@ -6,6 +6,7 @@ import android.media.MediaFormat;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 
@@ -15,7 +16,7 @@ import com.rainbowphantoms.learnmediademo.media.decodec.RPMediaDeCodec;
 import java.nio.ByteBuffer;
 
 public class VideoPlayActivity extends AppCompatActivity {
-
+    private static final String TAG = "VideoPlayActivity";
     /** 播放视图 **/
     private SurfaceView sufaceView;
     /** 解码器 **/
@@ -27,7 +28,7 @@ public class VideoPlayActivity extends AppCompatActivity {
     /** 上一帧的时间 **/
     private long mPreFrameTimeNS = 0;
     /** 视频路径 **/
-    private String mVideoPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/lsq_20190105_144604170.mp4";
+    private String mVideoPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/lsq_20190112_111048885.mp4";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +61,13 @@ public class VideoPlayActivity extends AppCompatActivity {
                 }
                 //计算帧间隔
                 mFrameInterval = (long) (1000000/frameRate);
+                //获取持续时间
             }
 
             @Override
             public void onDecodecBuffer(ByteBuffer byteBuffer, final MediaCodec.BufferInfo bufferInfo) {
                 //同步视频
+                Log.e(TAG,"buffertime : "+bufferInfo.presentationTimeUs + "duration : "+ mVideoCodec.getTotalTimeUs() + "flag : "+bufferInfo.flags);
                 snycVideo();
             }
 
@@ -87,11 +90,6 @@ public class VideoPlayActivity extends AppCompatActivity {
     private void snycVideo() {
         long currentFrameTimeNS = System.nanoTime();
         while (currentFrameTimeNS + mFrameInterval * 1000 >System.nanoTime()){
-            try {
-                Thread.sleep(5);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 

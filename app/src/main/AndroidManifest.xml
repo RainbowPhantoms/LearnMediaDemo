@@ -3,6 +3,7 @@
           package="com.rainbowphantoms.learnmediademo">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -23,6 +24,8 @@
         <activity android:name=".component.video.VideoPlayFbFActivity">
         </activity>
         <activity android:name=".component.audio.AudioPlayActivity">
+        </activity>
+        <activity android:name=".component.ExtractorActivity">
         </activity>
     </application>
 

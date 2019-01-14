@@ -13,8 +13,8 @@ import java.nio.ByteBuffer;
  * 媒体分离器
  * @author MirsFang
  */
-public class RPMediaExactor {
-    private static final String TAG = "RPMediaExactor";
+public class RPMediaExtractor {
+    private static final String TAG = "RPMediaExtractor";
 
     /** 媒体分离器 **/
     private MediaExtractor mExtractor;
@@ -28,7 +28,7 @@ public class RPMediaExactor {
     }
 
     /** 设置输出的文件名 **/
-    public void outputFileName(String fileName){
+    public void setOutputFileName(String fileName){
         this.mOutputFileName = fileName;
     }
 
@@ -39,8 +39,8 @@ public class RPMediaExactor {
         FileOutputStream audioOutputStream = null;
         try {
             //初始化视频输出和音频输出的路径
-            String outputVideoPath = Environment.getExternalStorageDirectory().getAbsolutePath() + mOutputFileName + ".h264";
-            String outputAudioPath = Environment.getExternalStorageDirectory().getAbsolutePath() + mOutputFileName + ".aac";
+            String outputVideoPath = Environment.getExternalStorageDirectory().getAbsolutePath() +"/" +mOutputFileName + ".h264";
+            String outputAudioPath = Environment.getExternalStorageDirectory().getAbsolutePath() +"/" +mOutputFileName + ".aac";
 
             //初始化文件输出流
             videoOutputStream = new FileOutputStream(outputVideoPath);
@@ -65,7 +65,7 @@ public class RPMediaExactor {
                 }
             }
 
-            ByteBuffer byteBuffer = ByteBuffer.allocate(500 * 1024);
+            ByteBuffer byteBuffer = ByteBuffer.allocate(1024 * 1024);
             //分离视频
             extractVideo(videoOutputStream, videoTrackIndex, byteBuffer);
             //分离音频
